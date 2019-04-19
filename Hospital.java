@@ -130,7 +130,12 @@ public class Hospital extends Application {
     	hbox.getChildren().clear();
     	hbox.getChildren().addAll(room1Text, room2Text, room3Text);
 
-    	patientInfo.setText(p.get(0).toString());
+    	
+    	if(p.size() < 1){
+    		patientInfo.setText("line is empty.");
+    	} else {
+    		patientInfo.setText(p.get(0).toString());
+    	}
     	vbox.getChildren().clear();
     	vbox.getChildren().addAll(patientInfo,textField,submit,hbox);
     }
