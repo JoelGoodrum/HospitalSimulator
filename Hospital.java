@@ -90,7 +90,7 @@ public class Hospital extends Application {
 
 		//buttons
 		submit.setOnAction(actionEvent -> {
-	        checkInPatient(line, queue, roomHbox, layout, textField, submit, room2, room1Text, room2Text, room3Text, patientInfo);
+	        checkInPatient(line, queue, roomHbox, layout, textField, submit, room1, room2, room3, room1Text, room2Text, room3Text, patientInfo);
 			updateInfo(line, queue, roomHbox, layout, textField, submit, room1Text, room2Text, room3Text, patientInfo);
 		});
 
@@ -106,12 +106,20 @@ public class Hospital extends Application {
     
 
     //checkInPatient
-    public void checkInPatient(ArrayList<Patient> p, HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Room room, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
+    public void checkInPatient(ArrayList<Patient> p, HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Room room1, Room room2, Room room3, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
     	queue.enQueue(p.remove(0), 5);
-    	if(room.isVacant()){
-    		room.addPatient(queue.deQueue());
-    		room2Text.setText(room.toString());
+    	if(room1.isVacant()){
+    		room1.addPatient(queue.deQueue());
+    		room1Text.setText(room1.toString());
     		
+    	}
+    	else if(room2.isVacant()){
+    		room2.addPatient(queue.deQueue());
+    		room2Text.setText(room2.toString());
+    	}
+    	else if(room3.isVacant()){
+    		room3.addPatient(queue.deQueue());
+    		room3Text.setText(room3.toString());
     	}
     	
     }
