@@ -17,6 +17,11 @@ class HospitalQueue<Patient> {
 			this.patient = patient;
 			this.priority = priority;
 		}
+
+		//toString
+		public String toString(){
+			return patient.toString();
+		}
 	}
 
 	//hospital queue methods
@@ -61,5 +66,6 @@ class HospitalQueue<Patient> {
 			return temp;
 		}
 	}
+
 
 }

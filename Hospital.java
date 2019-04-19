@@ -49,31 +49,45 @@ public class Hospital extends Application {
 		queue.enQueue(a,10);
 		queue.enQueue(b,2);
 		queue.enQueue(c,8);
+
+		//room objects
+		Room room1 = new Room(1);
+		Room room2 = new Room(2);
+		Room room3 = new Room(1);
 		
 
 		//GUI//
 		primaryStage.setTitle("HospitalSimulation");
 
-		Text patientInfo = new Text(a.toString());
+		Text patientInfo = new Text(queue.peek().toString());
 		patientInfo.setFill(Color.RED);
 
 		TextField textField = new TextField();
 		Button submit = new Button("Submit");
+		//submit.setId("button");
+		//submit.getStylesheets().add("CalcStyle.css");
 
-		Text room1 = new Text("room1");
-		room1.setFill(Color.GREEN);
+		Text room1Text = new Text(room1.toString());
+		room1Text.setFill(Color.GREEN);
 
-		Text room2 = new Text("room2");
-		room2.setFill(Color.GREEN);
+		Text room2Text = new Text(room2.toString());
+		room2Text.setFill(Color.GREEN);
 
-		Text room3 = new Text("room3");
-		room3.setFill(Color.GREEN);
+		Text room3Text = new Text(room3.toString());
+		room3Text.setFill(Color.GREEN);
+
+
 
 		//layout
-		VBox layout = new VBox(patientInfo,textField,submit,room1,room2,room3);
+		HBox roomHbox = new HBox(room1Text,room2Text,room3Text);
+		VBox layout = new VBox(patientInfo,textField,submit,roomHbox);
 		Scene scene = new Scene(layout,300,400);
 		//end layout
 
+		//buttons
+		submit.setOnAction(actionEvent -> {
+	        checkInPatient(queue, roomHbox, layout, textField, submit, room2, room1Text, room2Text, room3Text, patientInfo);
+		});
 
 		//show frame
 		primaryStage.setScene(scene);
@@ -82,5 +96,27 @@ public class Hospital extends Application {
 	}
 	public static void main(String[] args) {
         Application.launch(args);
+    }
+
+    //checkInPatient
+    public void checkInPatient(HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Room room, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
+    	if(room.isVacant()){
+    		room.addPatient(queue.deQueue());
+    		room2Text.setText(room.toString());
+    		
+    	}
+    	updateInfo(queue, hbox, vbox, textField, submit, room1Text, room2Text, room3Text, patientInfo);
+    	
+    }
+
+    //updateInfo
+    public void updateInfo(HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
+    	
+    	hbox.getChildren().clear();
+    	hbox.getChildren().addAll(room1Text, room2Text, room3Text);
+
+    	patientInfo = new Text(queue.peek().toString());
+    	vbox.getChildren().clear();
+    	vbox.getChildren().addAll(patientInfo,textField,submit,hbox);
     }
 }
