@@ -19,10 +19,23 @@
 	patients need
 	String name, int age, String sex, String condition, int oddsOfDying
 */
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.application.Application; 
+import javafx.scene.Group; 
+import javafx.scene.Scene; 
+import javafx.scene.paint.Color; 
+import javafx.stage.Stage;  
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text; 
+import javafx.geometry.Insets;
+
 
 public class Hospital extends Application {
 
@@ -36,14 +49,33 @@ public class Hospital extends Application {
 		queue.enQueue(a,10);
 		queue.enQueue(b,2);
 		queue.enQueue(c,8);
-		System.out.println(queue.deQueue());
-		System.out.println(queue.deQueue());
-		System.out.println(queue.deQueue());
+		
 
 		//GUI//
 		primaryStage.setTitle("HospitalSimulation");
-		Label label = new Label("Hello World, JavaFX !");
-		Scene scene = new Scene(label,400,200);
+
+		Text patientInfo = new Text(a.toString());
+		patientInfo.setFill(Color.RED);
+
+		TextField textField = new TextField();
+		Button submit = new Button("Submit");
+
+		Text room1 = new Text("room1");
+		room1.setFill(Color.GREEN);
+
+		Text room2 = new Text("room2");
+		room2.setFill(Color.GREEN);
+
+		Text room3 = new Text("room3");
+		room3.setFill(Color.GREEN);
+
+		//layout
+		VBox layout = new VBox(patientInfo,textField,submit,room1,room2,room3);
+		Scene scene = new Scene(layout,300,400);
+		//end layout
+
+
+		//show frame
 		primaryStage.setScene(scene);
 		primaryStage.show();
 

@@ -20,8 +20,14 @@ class Room<Patient> {
 		return patient.equals(null);
 	}
 
+	//add patiant
 	public void addPatient(Patient patient){
 		this.patient = patient;
+	}
+
+	//room status
+	public String viewStatus(){
+		return patient.toString();	
 	}
 
 

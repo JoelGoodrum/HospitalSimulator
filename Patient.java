@@ -17,15 +17,11 @@ class Patient {
 	}
 
 	//view patient status
-	public String viewStatus(){
+	public String toString(){
 		return "name: " + name + "\n" +
 			   "age: " + age + "\n" +
 			   "sex: " + sex + "\n" +
-			   "condition: " + condition;	   
-	}
-
-	public String toString(){
-		return "name: " + name;
+			   "condition: " + condition;
 	}
 
 }
