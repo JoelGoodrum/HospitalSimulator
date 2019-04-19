@@ -26,13 +26,21 @@ class HospitalQueue<Patient> {
 		return queue.size() == 0;
 	}
 
-	//peek  //see end
-	public Patient peek(){
+	//peek  //see end with highest priority
+	public PandP peek(){
 		if(queue.isEmpty() == true){
 			throw new NoSuchElementException();
 		}
 		else{
-			return queue.get(queue.size() - 1).patient;
+			int highestPriority = -1;
+			int indexOfPriority = -1;
+			for(int i = queue.size() - 1; i > -1; i--){
+				if(queue.get(i).priority >= highestPriority){
+					highestPriority = queue.get(i).priority;
+					indexOfPriority = i;
+				}
+			}
+			return queue.get(indexOfPriority);
 		}
 	}
 
@@ -48,7 +56,9 @@ class HospitalQueue<Patient> {
 			throw new NoSuchElementException();
 		}
 		else{
-			return queue.remove(0).patient;
+			Patient temp = peek().patient;
+			queue.remove(peek());
+			return temp;
 		}
 	}
 

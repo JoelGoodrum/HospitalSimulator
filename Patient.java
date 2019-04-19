@@ -24,4 +24,8 @@ class Patient {
 			   "condition: " + condition;	   
 	}
 
+	public String toString(){
+		return "name: " + name;
+	}
+
 }
