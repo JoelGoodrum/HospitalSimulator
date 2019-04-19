@@ -36,6 +36,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text; 
 import javafx.geometry.Insets;
 
+import java.util.*;
+
 
 public class Hospital extends Application {
 
@@ -45,10 +47,12 @@ public class Hospital extends Application {
 		Patient b = new Patient("mary",16,"female","broken arm",5);
 		Patient c = new Patient("bob",25,"male","fatigued",1);
 
+		ArrayList<Patient> line = new ArrayList<Patient>();
+		line.add(a);
+		line.add(b);
+		line.add(c);
+
 		HospitalQueue queue = new HospitalQueue();
-		queue.enQueue(a,10);
-		queue.enQueue(b,2);
-		queue.enQueue(c,8);
 
 		//room objects
 		Room room1 = new Room(1);
@@ -59,7 +63,7 @@ public class Hospital extends Application {
 		//GUI//
 		primaryStage.setTitle("HospitalSimulation");
 
-		Text patientInfo = new Text(queue.peek().toString());
+		Text patientInfo = new Text(line.get(0).toString());
 		patientInfo.setFill(Color.RED);
 
 		TextField textField = new TextField();
@@ -86,7 +90,8 @@ public class Hospital extends Application {
 
 		//buttons
 		submit.setOnAction(actionEvent -> {
-	        checkInPatient(queue, roomHbox, layout, textField, submit, room2, room1Text, room2Text, room3Text, patientInfo);
+	        checkInPatient(line, queue, roomHbox, layout, textField, submit, room2, room1Text, room2Text, room3Text, patientInfo);
+			updateInfo(line, queue, roomHbox, layout, textField, submit, room1Text, room2Text, room3Text, patientInfo);
 		});
 
 		//show frame
@@ -98,24 +103,26 @@ public class Hospital extends Application {
         Application.launch(args);
     }
 
+    
+
     //checkInPatient
-    public void checkInPatient(HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Room room, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
+    public void checkInPatient(ArrayList<Patient> p, HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Room room, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
+    	queue.enQueue(p.remove(0), 5);
     	if(room.isVacant()){
     		room.addPatient(queue.deQueue());
     		room2Text.setText(room.toString());
     		
     	}
-    	updateInfo(queue, hbox, vbox, textField, submit, room1Text, room2Text, room3Text, patientInfo);
     	
     }
 
     //updateInfo
-    public void updateInfo(HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
+    public void updateInfo(ArrayList<Patient> p,HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Text room1Text, Text room2Text, Text room3Text, Text patientInfo){
     	
     	hbox.getChildren().clear();
     	hbox.getChildren().addAll(room1Text, room2Text, room3Text);
 
-    	patientInfo = new Text(queue.peek().toString());
+    	patientInfo.setText(p.get(0).toString());
     	vbox.getChildren().clear();
     	vbox.getChildren().addAll(patientInfo,textField,submit,hbox);
     }
