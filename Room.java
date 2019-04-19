@@ -28,6 +28,12 @@ class Room<Patient> {
 		vacant = false;
 	}
 
+	//make vacant
+	public void makeVacant(){
+		patient = null;
+		vacant = true;
+	}
+
 	//room status
 	public String toString(){
 		if(isVacant() == true){
