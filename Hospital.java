@@ -74,21 +74,25 @@ public class Hospital extends Application {
 		Text room1Text = new Text(room1.toString());
 		room1Text.setFill(Color.GREEN);
 		Button clearRoom1 = new Button("clear");
+		Button fillRoom1 = new Button("fill");
 
 		Text room2Text = new Text(room2.toString());
 		room2Text.setFill(Color.GREEN);
 		Button clearRoom2 = new Button("clear");
+		Button fillRoom2 = new Button("fill");
 
 		Text room3Text = new Text(room3.toString());
 		room3Text.setFill(Color.GREEN);
 		Button clearRoom3 = new Button("clear");
+		Button fillRoom3 = new Button("fill");
 
 
 
 		//layout
 		HBox roomHbox = new HBox(room1Text,room2Text,room3Text);
 		HBox clearBtns = new HBox(clearRoom1, clearRoom2, clearRoom3);
-		VBox layout = new VBox(patientInfo,textField,submit,roomHbox,clearBtns);
+		HBox fillBtns = new HBox(fillRoom1, fillRoom2, fillRoom3);
+		VBox layout = new VBox(patientInfo,textField,submit,roomHbox,clearBtns,fillBtns);
 		Scene scene = new Scene(layout,300,400);
 		//end layout
 
@@ -115,6 +119,24 @@ public class Hospital extends Application {
 		//clear room btn
 		clearRoom3.setOnAction(actionEvent -> {
 	        room3.makeVacant(); 
+	        updateInfo(line, queue, roomHbox, clearBtns, layout, textField, submit, room1Text, room2Text, room3Text, patientInfo, room1, room2, room3);
+		});
+
+		//fill button
+		fillRoom1.setOnAction(actionEvent -> {
+	        fillRoom(queue, room1, room1Text); 
+	        updateInfo(line, queue, roomHbox, clearBtns, layout, textField, submit, room1Text, room2Text, room3Text, patientInfo, room1, room2, room3);
+		});
+
+		//fill button
+		fillRoom2.setOnAction(actionEvent -> {
+	        fillRoom(queue, room2, room2Text); 
+	        updateInfo(line, queue, roomHbox, clearBtns, layout, textField, submit, room1Text, room2Text, room3Text, patientInfo, room1, room2, room3);
+		});
+
+		//fill button
+		fillRoom3.setOnAction(actionEvent -> {
+	        fillRoom(queue, room3, room2Text); 
 	        updateInfo(line, queue, roomHbox, clearBtns, layout, textField, submit, room1Text, room2Text, room3Text, patientInfo, room1, room2, room3);
 		});
 
@@ -151,6 +173,15 @@ public class Hospital extends Application {
     		
     	}
     	
+    }
+
+    //fill room
+    public void fillRoom(HospitalQueue queue, Room room, Text roomText){
+    	if(room.isVacant()){
+    		room.addPatient(queue.deQueue());
+    		roomText.setText(room.toString());
+    		
+    	}
     }
 
     
