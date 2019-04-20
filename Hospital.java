@@ -45,14 +45,6 @@ public class Hospital extends Application {
 
 	public void start(Stage primaryStage) throws Exception{
 		
-		Patient a = new Patient("jonh",15,"male","bleeding",9);
-		Patient b = new Patient("mary",16,"female","broken arm",5);
-		Patient c = new Patient("bob",25,"male","fatigued",1);
-
-		ArrayList<Patient> line = new ArrayList<Patient>();
-		line.add(a);
-		line.add(b);
-		line.add(c);
 
 		HospitalQueue queue = new HospitalQueue();
 
@@ -69,8 +61,12 @@ public class Hospital extends Application {
 		Text name = new Text("name: ");
 		TextField nameInput = new TextField();
 
+	
+
 		Text age = new Text("age: ");
 		TextField ageInput = new TextField();
+		
+        
 
 		Text sex = new Text("sex: ");
 		ToggleGroup sexInput = new ToggleGroup();
@@ -78,6 +74,10 @@ public class Hospital extends Application {
 		male.setToggleGroup(sexInput);
 		RadioButton female = new RadioButton("female");
 		female.setToggleGroup(sexInput);
+
+		RadioButton selectedSex = (RadioButton) sexInput.getSelectedToggle();
+		//temp.sex(
+		
 		
 
 
@@ -85,7 +85,7 @@ public class Hospital extends Application {
 		TextField conditionInput = new TextField();
 
 		ToggleGroup priorityInput = new ToggleGroup();
-		Text priority = new Text("priority: ");
+		Text priorityText = new Text("priority: ");
 		RadioButton one = new RadioButton("1");
 		RadioButton two = new RadioButton("2");
 		RadioButton three = new RadioButton("3");
@@ -107,11 +107,11 @@ public class Hospital extends Application {
 		nine.setToggleGroup(priorityInput);
 		ten.setToggleGroup(priorityInput);
 
+
 		HBox priorityBtnBox = new HBox(one,two,three,four,five,six,seven,eight,nine,ten);
-		VBox patientInput = new VBox(name,nameInput,age,ageInput,sex,male,female,condition,conditionInput,priorityBtnBox);
+		VBox patientInput = new VBox(name,nameInput,age,ageInput,sex,male,female,condition,conditionInput,priorityText,priorityBtnBox);
 		//end patient input
 
-		TextField textField = new TextField();
 		Button submit = new Button("Submit");
 		//submit.setId("button");
 		//submit.getStylesheets().add("CalcStyle.css");
@@ -137,7 +137,7 @@ public class Hospital extends Application {
 		HBox roomHbox = new HBox(room1Text,room2Text,room3Text);
 		HBox clearBtns = new HBox(clearRoom1, clearRoom2, clearRoom3);
 		HBox fillBtns = new HBox(fillRoom1, fillRoom2, fillRoom3);
-		VBox layout = new VBox(patientInput,textField,submit,roomHbox,clearBtns,fillBtns);
+		VBox layout = new VBox(patientInput,submit,roomHbox,clearBtns,fillBtns);
 		Scene scene = new Scene(layout,300,400);
 		//end layout
 
@@ -145,8 +145,36 @@ public class Hospital extends Application {
 
 		//submit button
 		submit.setOnAction(actionEvent -> {
-	        checkInPatient(line, queue, roomHbox, layout, textField, submit, room1, room2, room3, room1Text, room2Text, room3Text);
+
+			//get all info
+			Patient temp = new Patient();
+			//name/age//
+            temp.name(nameInput.getText());
+            temp.age(ageInput.getText());
+            //sex
+        	if(male.isSelected()){temp.sex("male");}
+			if(female.isSelected()){temp.sex("female");}
+			//condition
+			temp.condition(conditionInput.getText());
+			//priority
+			if(one.isSelected()){temp.priority(1);}
+			if(two.isSelected()){temp.priority(2);}
+			if(three.isSelected()){temp.priority(3);}
+			if(four.isSelected()){temp.priority(4);}
+			if(five.isSelected()){temp.priority(5);}
+			if(six.isSelected()){temp.priority(6);}
+			if(seven.isSelected()){temp.priority(7);}
+			if(eight.isSelected()){temp.priority(8);}
+			if(nine.isSelected()){temp.priority(9);}
+			if(ten.isSelected()){temp.priority(10);}
+
+			//
+
+			//add patient
+			queue.enQueue(temp, temp.getPriority());
+	        checkInPatient(queue, roomHbox, layout, submit, room1, room2, room3, room1Text, room2Text, room3Text);
 			updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+			
 		});
 
 		//clear room btn
@@ -197,8 +225,8 @@ public class Hospital extends Application {
     
 
     //checkInPatient
-    public void checkInPatient(ArrayList<Patient> p, HospitalQueue queue, HBox hbox, VBox vbox, TextField textField, Button submit, Room room1, Room room2, Room room3, Text room1Text, Text room2Text, Text room3Text){
-    	queue.enQueue(p.remove(0), 5);
+    public void checkInPatient(HospitalQueue queue, HBox hbox, VBox vbox, Button submit, Room room1, Room room2, Room room3, Text room1Text, Text room2Text, Text room3Text){
+  
 
     	if(room1.isVacant()){
     		room1.addPatient(queue.deQueue());
