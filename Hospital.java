@@ -238,7 +238,7 @@ public class Hospital extends Application {
 
 		//fill button
 		fillRoom3.setOnAction(actionEvent -> {
-	        fillRoom(queue, room3, room2Text); 
+	        fillRoom(queue, room3, room3Text); 
 	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 		});
 
