@@ -67,5 +67,10 @@ class HospitalQueue<Patient> {
 		}
 	}
 
+	//size
+	public int size(){
+		return queue.size();
+	}
+
 
 }

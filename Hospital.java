@@ -76,7 +76,7 @@ public class Hospital extends Application {
 		female.setToggleGroup(sexInput);
 
 		RadioButton selectedSex = (RadioButton) sexInput.getSelectedToggle();
-		//temp.sex(
+		
 		
 		
 
@@ -131,13 +131,15 @@ public class Hospital extends Application {
 		Button clearRoom3 = new Button("clear");
 		Button fillRoom3 = new Button("fill");
 
+		Text waitingInQueue = new Text("waiting in queue: " + queue.size());
+
 
 
 		//layout
 		HBox roomHbox = new HBox(room1Text,room2Text,room3Text);
 		HBox clearBtns = new HBox(clearRoom1, clearRoom2, clearRoom3);
 		HBox fillBtns = new HBox(fillRoom1, fillRoom2, fillRoom3);
-		VBox layout = new VBox(patientInput,submit,roomHbox,clearBtns,fillBtns);
+		VBox layout = new VBox(patientInput,submit,roomHbox,clearBtns,fillBtns, waitingInQueue);
 		Scene scene = new Scene(layout,300,400);
 		//end layout
 
@@ -173,44 +175,44 @@ public class Hospital extends Application {
 			//add patient
 			queue.enQueue(temp, temp.getPriority());
 	        checkInPatient(queue, roomHbox, layout, submit, room1, room2, room3, room1Text, room2Text, room3Text);
-			updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+			updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 			
 		});
 
 		//clear room btn
 		clearRoom1.setOnAction(actionEvent -> {
 	        room1.makeVacant(); 
-	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 		});
 
 		//clear room btn
 		clearRoom2.setOnAction(actionEvent -> {
 	        room2.makeVacant(); 
-	        	updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 		});
 
 		//clear room btn
 		clearRoom3.setOnAction(actionEvent -> {
 	        room3.makeVacant(); 
-	        	updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 		});
 
 		//fill button
 		fillRoom1.setOnAction(actionEvent -> {
 	        fillRoom(queue, room1, room1Text); 
-	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 		});
 
 		//fill button
 		fillRoom2.setOnAction(actionEvent -> {
 	        fillRoom(queue, room2, room2Text); 
-	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 		});
 
 		//fill button
 		fillRoom3.setOnAction(actionEvent -> {
 	        fillRoom(queue, room3, room2Text); 
-	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3);
+	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 		});
 
 		//show frame
@@ -260,11 +262,12 @@ public class Hospital extends Application {
     
 
     //updateInfo
-    public void updateInfo(Text room1Text, Text room2Text, Text room3Text, Room room1, Room room2, Room room3){
+    public void updateInfo(Text room1Text, Text room2Text, Text room3Text, Room room1, Room room2, Room room3, Text waitingInQueue, HospitalQueue queue){
     	
     	room1Text.setText(room1.toString());
     	room2Text.setText(room2.toString());
     	room3Text.setText(room3.toString());
+    	waitingInQueue.setText("waiting in queue: " + queue.size());
     }
 
 }
