@@ -1,17 +1,28 @@
 .button {
 	
 	-fx-font-size : 14px;
-	
 	-fx-pref-width: 60px;
-/*
-	-fx-pref-height: 20px;
-	-fx-padding: 10 10 10 10;
-*/
-	
+	-fx-background-color: #ffb938;
+
+}
+
+.button:hover{
+	-fx-background-color: #ff8437;
+
 }
 
 .submit-button {
 	-fx-pref-width: 350px;
+}
+
+
+.layout {
+	-fx-background-color: #99c6ff;
+	
+}
+
+.letters{
+	/*-fx-text-fill: #FFFFFF;*/
 }
 
 

@@ -47,7 +47,7 @@ public class Hospital extends Application {
 
 		
 		
-
+		String cssFont = "-fx-text-fill: #FFFFFF;";
 		HospitalQueue queue = new HospitalQueue();
 
 		//room objects
@@ -61,21 +61,32 @@ public class Hospital extends Application {
 
 		//patient input
 		Text name = new Text("name: ");
+		//name.getStyle(cssFont);
+		//name.setFill(Color.WHITE);
+		//name.getStylesheets().add("Hospital.css");
 		TextField nameInput = new TextField();
 
 	
 
 		Text age = new Text("age: ");
+		//age.getStyleClass().add("letters");
+		//age.getStylesheets().add("Hospital.css");
 		TextField ageInput = new TextField();
 		
         
 
 		Text sex = new Text("sex: ");
+		//sex.getStyleClass().add("letters");
+		//sex.getStylesheets().add("Hospital.css");
 		ToggleGroup sexInput = new ToggleGroup();
 		RadioButton male = new RadioButton("male");
 		male.setToggleGroup(sexInput);
+		male.getStyleClass().add("letters");
+		male.getStylesheets().add("Hospital.css");
 		RadioButton female = new RadioButton("female");
 		female.setToggleGroup(sexInput);
+		female.getStyleClass().add("letters");
+		female.getStylesheets().add("Hospital.css");
 
 		RadioButton selectedSex = (RadioButton) sexInput.getSelectedToggle();
 		
@@ -84,6 +95,8 @@ public class Hospital extends Application {
 
 
 		Text condition = new Text("condition: ");
+		//condition.getStyleClass().add("letters");
+		//condition.getStylesheets().add("Hospital.css");
 		TextField conditionInput = new TextField();
 
 		ToggleGroup priorityInput = new ToggleGroup();
@@ -108,6 +121,26 @@ public class Hospital extends Application {
 		eight.setToggleGroup(priorityInput);
 		nine.setToggleGroup(priorityInput);
 		ten.setToggleGroup(priorityInput);
+		one.getStyleClass().add("letters");
+		one.getStylesheets().add("Hospital.css");
+		two.getStyleClass().add("letters");
+		two.getStylesheets().add("Hospital.css");
+		three.getStyleClass().add("letters");
+		three.getStylesheets().add("Hospital.css");
+		four.getStyleClass().add("letters");
+		four.getStylesheets().add("Hospital.css");
+		five.getStyleClass().add("letters");
+		five.getStylesheets().add("Hospital.css");
+		six.getStyleClass().add("letters");
+		six.getStylesheets().add("Hospital.css");
+		seven.getStyleClass().add("letters");
+		seven.getStylesheets().add("Hospital.css");
+		eight.getStyleClass().add("letters");
+		eight.getStylesheets().add("Hospital.css");
+		nine.getStyleClass().add("letters");
+		nine.getStylesheets().add("Hospital.css");
+		ten.getStyleClass().add("letters");
+		ten.getStylesheets().add("Hospital.css");
 
 
 		HBox priorityBtnBox = new HBox(5,one,two,three,four,five,six,seven,eight,nine,ten);
@@ -119,7 +152,7 @@ public class Hospital extends Application {
 		submit.getStylesheets().add("Hospital.css");
 
 		Text room1Text = new Text(room1.toString());
-		room1Text.setFill(Color.GREEN);
+		room1Text.setFill(Color.DARKGREEN);
 		Button clearRoom1 = new Button("clear");
 		Button fillRoom1 = new Button("fill");
 		clearRoom1.getStyleClass().add("button");
@@ -128,7 +161,7 @@ public class Hospital extends Application {
 		fillRoom1.getStylesheets().add("Hospital.css");
 
 		Text room2Text = new Text(room2.toString());
-		room2Text.setFill(Color.GREEN);
+		room2Text.setFill(Color.DARKGREEN);
 		Button clearRoom2 = new Button("clear");
 		Button fillRoom2 = new Button("fill");
 		clearRoom2.getStyleClass().add("button");
@@ -137,7 +170,7 @@ public class Hospital extends Application {
 		fillRoom2.getStylesheets().add("Hospital.css");
 
 		Text room3Text = new Text(room3.toString());
-		room3Text.setFill(Color.GREEN);
+		room3Text.setFill(Color.DARKGREEN);
 		Button clearRoom3 = new Button("clear");
 		Button fillRoom3 = new Button("fill");
 		clearRoom3.getStyleClass().add("button");
@@ -150,7 +183,6 @@ public class Hospital extends Application {
 
 
 		//layout
-
 		VBox room1Vbox = new VBox(5, room1Text, clearRoom1, fillRoom1);
 		VBox room2Vbox = new VBox(5, room2Text, clearRoom2, fillRoom2);
 		VBox room3Vbox = new VBox(5, room3Text, clearRoom3, fillRoom3);
@@ -158,12 +190,17 @@ public class Hospital extends Application {
 
 		roomHbox.getStylesheets().add("Hospital.css");
 		roomHbox.getStyleClass().add("hbox");
-
 		
 		VBox layout = new VBox(5, patientInput, submit, roomHbox, waitingInQueue);
 		layout.setPadding(new Insets(5,5,5,5));
-		Scene scene = new Scene(layout,350,500);
+		layout.getStyleClass().add("layout");
+		layout.getStylesheets().add("Hospital.css");
 		//end layout
+
+		//scene object
+		Scene scene = new Scene(layout,350,500);
+		
+		
 
 		
 
@@ -207,21 +244,21 @@ public class Hospital extends Application {
 		clearRoom1.setOnAction(actionEvent -> {
 	        room1.makeVacant(); 
 	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
-	        room1Text.setFill(Color.GREEN);
+	        room1Text.setFill(Color.DARKGREEN);
 		});
 
 		//clear room btn
 		clearRoom2.setOnAction(actionEvent -> {
 	        room2.makeVacant(); 
 	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
-	        room2Text.setFill(Color.GREEN);
+	        room2Text.setFill(Color.DARKGREEN);
 		});
 
 		//clear room btn
 		clearRoom3.setOnAction(actionEvent -> {
 	        room3.makeVacant(); 
 	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
-	        room3Text.setFill(Color.GREEN);
+	        room3Text.setFill(Color.DARKGREEN);
 		});
 
 		//fill button
@@ -243,6 +280,7 @@ public class Hospital extends Application {
 		});
 
 		//show frame
+		
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
