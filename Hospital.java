@@ -44,6 +44,8 @@ import java.util.*;
 public class Hospital extends Application {
 
 	public void start(Stage primaryStage) throws Exception{
+
+		
 		
 
 		HospitalQueue queue = new HospitalQueue();
@@ -51,7 +53,7 @@ public class Hospital extends Application {
 		//room objects
 		Room room1 = new Room(1);
 		Room room2 = new Room(2);
-		Room room3 = new Room(1);
+		Room room3 = new Room(3);
 		
 
 		//GUI//
@@ -109,39 +111,61 @@ public class Hospital extends Application {
 
 
 		HBox priorityBtnBox = new HBox(one,two,three,four,five,six,seven,eight,nine,ten);
-		VBox patientInput = new VBox(name,nameInput,age,ageInput,sex,male,female,condition,conditionInput,priorityText,priorityBtnBox);
+		VBox patientInput = new VBox(5,name,nameInput,age,ageInput,sex,male,female,condition,conditionInput,priorityText,priorityBtnBox);
 		//end patient input
 
 		Button submit = new Button("Submit");
-		//submit.setId("button");
-		//submit.getStylesheets().add("CalcStyle.css");
+		submit.getStyleClass().add("submit-button");
+		submit.getStylesheets().add("Hospital.css");
 
 		Text room1Text = new Text(room1.toString());
 		room1Text.setFill(Color.GREEN);
 		Button clearRoom1 = new Button("clear");
 		Button fillRoom1 = new Button("fill");
+		clearRoom1.getStyleClass().add("button");
+		clearRoom1.getStylesheets().add("Hospital.css");
+		fillRoom1.getStyleClass().add("button");
+		fillRoom1.getStylesheets().add("Hospital.css");
 
 		Text room2Text = new Text(room2.toString());
 		room2Text.setFill(Color.GREEN);
 		Button clearRoom2 = new Button("clear");
 		Button fillRoom2 = new Button("fill");
+		clearRoom2.getStyleClass().add("button");
+		clearRoom2.getStylesheets().add("Hospital.css");
+		fillRoom2.getStyleClass().add("button");
+		fillRoom2.getStylesheets().add("Hospital.css");
 
 		Text room3Text = new Text(room3.toString());
 		room3Text.setFill(Color.GREEN);
 		Button clearRoom3 = new Button("clear");
 		Button fillRoom3 = new Button("fill");
+		clearRoom3.getStyleClass().add("button");
+		fillRoom3.getStyleClass().add("button");
+		clearRoom3.getStylesheets().add("Hospital.css");
+		fillRoom3.getStylesheets().add("Hospital.css");
 
 		Text waitingInQueue = new Text("waiting in queue: " + queue.size());
 
 
 
 		//layout
-		HBox roomHbox = new HBox(room1Text,room2Text,room3Text);
-		HBox clearBtns = new HBox(clearRoom1, clearRoom2, clearRoom3);
-		HBox fillBtns = new HBox(fillRoom1, fillRoom2, fillRoom3);
-		VBox layout = new VBox(patientInput,submit,roomHbox,clearBtns,fillBtns, waitingInQueue);
-		Scene scene = new Scene(layout,300,400);
+
+		VBox room1Vbox = new VBox(5, room1Text, clearRoom1, fillRoom1);
+		VBox room2Vbox = new VBox(5, room2Text, clearRoom2, fillRoom2);
+		VBox room3Vbox = new VBox(5, room3Text, clearRoom3, fillRoom3);
+		HBox roomHbox = new HBox(10, room1Vbox,room2Vbox,room3Vbox);
+
+		roomHbox.getStylesheets().add("Hospital.css");
+		roomHbox.getStyleClass().add("hbox");
+
+		
+		VBox layout = new VBox(5, patientInput, submit, roomHbox, waitingInQueue);
+		layout.setPadding(new Insets(5,5,5,5));
+		Scene scene = new Scene(layout,350,500);
 		//end layout
+
+		
 
 		//buttons
 
@@ -174,7 +198,7 @@ public class Hospital extends Application {
 
 			//add patient
 			queue.enQueue(temp, temp.getPriority());
-	        checkInPatient(queue, roomHbox, layout, submit, room1, room2, room3, room1Text, room2Text, room3Text);
+	        checkInPatient(queue, room1, room2, room3, room1Text, room2Text, room3Text);
 			updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 			
 		});
@@ -183,18 +207,21 @@ public class Hospital extends Application {
 		clearRoom1.setOnAction(actionEvent -> {
 	        room1.makeVacant(); 
 	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
+	        room1Text.setFill(Color.GREEN);
 		});
 
 		//clear room btn
 		clearRoom2.setOnAction(actionEvent -> {
 	        room2.makeVacant(); 
 	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
+	        room2Text.setFill(Color.GREEN);
 		});
 
 		//clear room btn
 		clearRoom3.setOnAction(actionEvent -> {
 	        room3.makeVacant(); 
 	        updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
+	        room3Text.setFill(Color.GREEN);
 		});
 
 		//fill button
@@ -227,24 +254,27 @@ public class Hospital extends Application {
     
 
     //checkInPatient
-    public void checkInPatient(HospitalQueue queue, HBox hbox, VBox vbox, Button submit, Room room1, Room room2, Room room3, Text room1Text, Text room2Text, Text room3Text){
+    public void checkInPatient(HospitalQueue queue, Room room1, Room room2, Room room3, Text room1Text, Text room2Text, Text room3Text){
   
 
     	if(room1.isVacant()){
     		room1.addPatient(queue.deQueue());
     		room1Text.setText(room1.toString());
+    		room1Text.setFill(Color.RED);
     		
     	}
 
     	else if(room2.isVacant()){
     		room2.addPatient(queue.deQueue());
     		room2Text.setText(room2.toString());
+    		room2Text.setFill(Color.RED);
     		
     	}
 
     	else if(room3.isVacant()){
     		room3.addPatient(queue.deQueue());
     		room3Text.setText(room3.toString());
+    		room3Text.setFill(Color.RED);
     		
     	}
     	
@@ -255,6 +285,7 @@ public class Hospital extends Application {
     	if(room.isVacant()){
     		room.addPatient(queue.deQueue());
     		roomText.setText(room.toString());
+    		roomText.setFill(Color.RED);
     		
     	}
     }
@@ -269,5 +300,7 @@ public class Hospital extends Application {
     	room3Text.setText(room3.toString());
     	waitingInQueue.setText("waiting in queue: " + queue.size());
     }
+
+    	
 
 }

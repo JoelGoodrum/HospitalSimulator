@@ -1,0 +1,17 @@
+.button {
+	
+	-fx-font-size : 14px;
+	
+	-fx-pref-width: 60px;
+/*
+	-fx-pref-height: 20px;
+	-fx-padding: 10 10 10 10;
+*/
+	
+}
+
+.submit-button {
+	-fx-pref-width: 350px;
+}
+
+
