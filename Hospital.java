@@ -183,15 +183,15 @@ public class Hospital extends Application {
 
 
 		//layout
-		VBox room1Vbox = new VBox(5, room1Text, clearRoom1, fillRoom1);
-		VBox room2Vbox = new VBox(5, room2Text, clearRoom2, fillRoom2);
-		VBox room3Vbox = new VBox(5, room3Text, clearRoom3, fillRoom3);
+		VBox room1Vbox = new VBox(5, fillRoom1, clearRoom1, room1Text);
+		VBox room2Vbox = new VBox(5, fillRoom2, clearRoom2, room2Text);
+		VBox room3Vbox = new VBox(5, fillRoom3, clearRoom3, room3Text);
 		HBox roomHbox = new HBox(10, room1Vbox,room2Vbox,room3Vbox);
 
 		roomHbox.getStylesheets().add("Hospital.css");
 		roomHbox.getStyleClass().add("hbox");
 		
-		VBox layout = new VBox(5, patientInput, submit, roomHbox, waitingInQueue);
+		VBox layout = new VBox(6, patientInput, submit, waitingInQueue, roomHbox);
 		layout.setPadding(new Insets(5,5,5,5));
 		layout.getStyleClass().add("layout");
 		layout.getStylesheets().add("Hospital.css");
