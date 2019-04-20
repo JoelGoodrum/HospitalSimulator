@@ -29,7 +29,7 @@ class Patient {
 		return "name: " + name + "\n" +
 			   "age: " + age + "\n" +
 			   "sex: " + sex + "\n" +
-			   "condition: " + condition + "\n" +
+			   "cdt: " + condition + "\n" +
 			   "priority: " + priority;
 	}
 

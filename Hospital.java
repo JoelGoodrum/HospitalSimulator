@@ -110,7 +110,7 @@ public class Hospital extends Application {
 		ten.setToggleGroup(priorityInput);
 
 
-		HBox priorityBtnBox = new HBox(one,two,three,four,five,six,seven,eight,nine,ten);
+		HBox priorityBtnBox = new HBox(5,one,two,three,four,five,six,seven,eight,nine,ten);
 		VBox patientInput = new VBox(5,name,nameInput,age,ageInput,sex,male,female,condition,conditionInput,priorityText,priorityBtnBox);
 		//end patient input
 
