@@ -37,7 +37,7 @@ class Room<Patient> {
 	//room status
 	public String toString(){
 		if(isVacant() == true){
-			return "Room:#"+roomNumb +"\n"+ "vacant";
+			return "Room:#"+roomNumb +"\n"+ "vacant" + "\n\n\n\n";
 		}
 		else{
 			return "Room:#"+roomNumb +"\n"+ patient.toString();	

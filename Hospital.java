@@ -111,6 +111,7 @@ public class Hospital extends Application {
 		RadioButton eight = new RadioButton("8");
 		RadioButton nine = new RadioButton("9");
 		RadioButton ten = new RadioButton("10");
+
 		one.setToggleGroup(priorityInput);
 		two.setToggleGroup(priorityInput);
 		three.setToggleGroup(priorityInput);
@@ -121,6 +122,7 @@ public class Hospital extends Application {
 		eight.setToggleGroup(priorityInput);
 		nine.setToggleGroup(priorityInput);
 		ten.setToggleGroup(priorityInput);
+		
 		one.getStyleClass().add("letters");
 		one.getStylesheets().add("Hospital.css");
 		two.getStyleClass().add("letters");
@@ -191,7 +193,7 @@ public class Hospital extends Application {
 		roomHbox.getStylesheets().add("Hospital.css");
 		roomHbox.getStyleClass().add("hbox");
 		
-		VBox layout = new VBox(6, patientInput, submit, waitingInQueue, roomHbox);
+		VBox layout = new VBox(8, patientInput, submit, roomHbox, waitingInQueue);
 		layout.setPadding(new Insets(5,5,5,5));
 		layout.getStyleClass().add("layout");
 		layout.getStylesheets().add("Hospital.css");
