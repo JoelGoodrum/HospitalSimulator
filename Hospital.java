@@ -240,6 +240,24 @@ public class Hospital extends Application {
 	        checkInPatient(queue, room1, room2, room3, room1Text, room2Text, room3Text);
 			updateInfo(room1Text, room2Text, room3Text, room1, room2, room3, waitingInQueue, queue);
 			
+			//clear info
+			nameInput.clear();
+			ageInput.clear();
+			male.setSelected(false);
+			female.setSelected(false);
+
+			one.setSelected(false);
+			two.setSelected(false);
+			three.setSelected(false);
+			four.setSelected(false);
+			five.setSelected(false);
+			six.setSelected(false);
+			seven.setSelected(false);
+			eight.setSelected(false);
+			nine.setSelected(false);
+			ten.setSelected(false);
+
+			conditionInput.clear();
 		});
 
 		//clear room btn
