@@ -1,6 +1,6 @@
 import java.util.*;
-//room class
 
+//room class
 class Room<Patient> {
 
 	//variables

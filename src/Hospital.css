@@ -1,3 +1,6 @@
+/**
+Stylize Hospital Simulation GUI
+*/
 .button {
 	
 	-fx-font-size : 14px;
@@ -21,8 +24,5 @@
 	
 }
 
-.letters{
-	/*-fx-text-fill: #FFFFFF;*/
-}
 
 
